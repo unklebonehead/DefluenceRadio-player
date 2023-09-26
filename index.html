@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100&display=swap" rel="stylesheet">
   <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
-
+  <script src="https://chat.peakd.com/stwidget.js"></script>
   <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
   <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
 </head>
@@ -19,22 +19,69 @@
     <center>
       <div class="welcome-text">
 
-        <h2>Defluence Radio</h2></br>
-        <p>Do you want to get defluenced?</p>
-        <p>Push play to listen to the best in music & talk. Worry free & distraction free.</p>
+        <h2>Just push play!</h2></br>
+        <p>And listen to the best in music & talk. Worry free & distraction free.</p>
         <p>And know that you aren't being tracked or spied on.</p>
         <p></p>
     </center><br></br>
-    <div style="padding-top:56.25%;position:relative;width: 100%">
-      <iframe src="https://app.tpstreams.com/embed/gbdks5/AFYtqB7MnAp/?access_token=70ef3a5e-6ab8-4ea0-8d10-b749ad34e176" style="border:0;max-width:100%;position:absolute;top:0;left:0;height:100%;width:100%;"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope picture-in-picture" allowfullscreen="" frameborder="0">
-      </iframe>
+    <div style="padding-top:;position:relative;width: 100%">
+      <iframe src="https://radio.defluence.me/public/defluenced_radio/embed" frameborder="0" allowtransparency="true" style="width: 100%; min-height: 150px; border: 0;"></iframe>
     </div>
-    <div style="padding-top:56.25%;position:relative;">
-      <iframe src="https://app.tpstreams.com/live-chat/AFYtqB7MnAp/" style="border:0;max-width:100%;position:absolute;top:0;left:0;height:100%;width:100%;"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope picture-in-picture" allowfullscreen="" frameborder="0">
-      </iframe>
-    </div>
+    <div>
+      <div class="wrapper">
+        <center>
+          <div class="welcome-text">
+
+            <h2>Last 10 played</h2><br></br>
+        </center>
+        <iframe src="https://radio.defluence.me/public/defluenced_radio/history?theme=dark" frameborder="0" allowtransparency="true" style="width: 100%; min-height: 300px; border: 0;"></iframe>
+      </div>
+      <div class="wrapper">
+        <center>
+          <div class="welcome-text">
+
+            <h2>Live show Chat</h2>
+        </center>
+        <script>
+          var stwidget = new StWidget('https://chat.peakd.com/t/hive-194864/1');
+          stwidget.properties = {
+            "requireLogin": false,
+            "showSidebar": true,
+            "sidebar": 2,
+            "sidebar2enableSharedView": false,
+            "sidebarToggleByChannelNameOnDirectGroup": false,
+            "streambarExpand": false,
+            "streambarMode": 1,
+            "sidebarAddButton": 1,
+            "communityChannelNameFormat": "C/<title>/<name>",
+            "messageIconFlexClass": "block text-justify lg:text-left sm:flex",
+            "messageIconClass": "iconFloat",
+            "--appCommunityIconFontSize": "18px",
+            "--appCommunityIconSize": "42px",
+            "homeTabCommunities": false,
+            "homeTabPreferences": true,
+            "homeTabThemes": true,
+            "onlyPrependCommunities": true,
+            "prependCommunities": [
+              "hive-194864"
+            ],
+            "defaultTheme": "Dark",
+            "--appFontFamily": "'Lato'",
+            "--appFontSize": "16px",
+            "--appMessageFontFamily": "'Lato'",
+            "--appMessageFontSize": "16px"
+          };
+          var element = stwidget.createElement('450px', '556px', false, true);
+          stwidget.setStyle({
+            direction: 'rtl'
+          });
+
+          //optionally add style/positioning
+          //stwidget.setStyle({ direction: 'rtl', top: '51px', right: '32px' });
+          //Add the element to webpage
+          //e.appendChild(element);
+        </script>
+      </div>
 </body>
 
 </html>
