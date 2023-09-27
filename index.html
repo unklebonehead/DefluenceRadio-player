@@ -12,6 +12,23 @@
   <script src="https://chat.peakd.com/stwidget.js"></script>
   <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
   <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
+  <style>
+      /* Style for the album artwork */
+      #albumArt {
+          max-width: 150px;
+          max-height: 150px;
+      }
+
+      /* Style for the song list */
+      #songList {
+          margin-top: 20px;
+      }
+
+      /* Style for individual song entries in the list */
+      .songEntry {
+          margin-bottom: 10px;
+      }
+  </style>
 </head>
 
 <body>
@@ -19,69 +36,57 @@
     <center>
       <div class="welcome-text">
 
-        <h2>Just push play!</h2></br>
-        <p>And listen to the best in music & talk. Worry free & distraction free.</p>
-        <p>And know that you aren't being tracked or spied on.</p>
-        <p></p>
-    </center><br></br>
-    <div style="padding-top:;position:relative;width: 100%">
-      <iframe src="https://radio.defluence.me/public/defluenced_radio/embed" frameborder="0" allowtransparency="true" style="width: 100%; min-height: 150px; border: 0;"></iframe>
-    </div>
-    <div>
-      <div class="wrapper">
-        <center>
-          <div class="welcome-text">
+        <h2>Defluenced Radio!</h2></br>
+        <p>Just push the play button and listen to the best in edutainment and enjoy that you aren't being tracked or spied on.</p>
+        <br></br>
+        <div id="nowPlayingInfo">
+            <img id="albumArt" src="" alt="Album Art">
+            <p id="songTitle"></p>
+            <p id="artist"></p>
+        </div><br></br>
+        <div>
+          <script>
+              async function fetchNowPlaying() {
+                  try {
+                      const response = await fetch('https://radio.defluence.me/api/nowplaying_static/defluenced_radio.json');
+                      const data = await response.json();
 
-            <h2>Last 10 played</h2><br></br>
-        </center>
-        <iframe src="https://radio.defluence.me/public/defluenced_radio/history?theme=dark" frameborder="0" allowtransparency="true" style="width: 100%; min-height: 300px; border: 0;"></iframe>
+                      // Extract the relevant information from the API response
+                      const songTitle = data.now_playing.song.title;
+                      const artist = data.now_playing.song.artist;
+                      const artworkUrl = data.now_playing.song.art;
+
+                      // Update the audio player source
+                      // const audioPlayer = document.getElementById('audioPlayer');
+                      // audioPlayer.src = "https://streamunk.indieland.tv/listen/defluenced_radio/radio.mp3";
+                      // audioPlayer.load();
+
+                      // Update the song information and artwork
+                      const songTitleElement = document.getElementById('songTitle');
+                      const artistElement = document.getElementById('artist');
+                      const albumArtElement = document.getElementById('albumArt');
+
+                      songTitleElement.textContent = `Song: ${songTitle}`;
+                      artistElement.textContent = `Artist: ${artist}`;
+                      albumArtElement.src = artworkUrl;
+                  } catch (error) {
+                      console.error('Error fetching data:', error);
+                  }
+              }
+
+              // Call the fetchNowPlaying function to initially populate the data
+              fetchNowPlaying();
+
+              // Refresh the data every 30 seconds (or as desired)
+              setInterval(fetchNowPlaying, 15000); // 30,000 milliseconds = 30 seconds
+          </script>
+        </div>
+        <div><audio id="audioPlayer" controls>
+            <source src="https://streamunk.indieland.tv/listen/defluenced_radio/radio.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
       </div>
-      <div class="wrapper">
-        <center>
-          <div class="welcome-text">
 
-            <h2>Live show Chat</h2>
-        </center>
-        <script>
-          var stwidget = new StWidget('https://chat.peakd.com/t/hive-194864/1');
-          stwidget.properties = {
-            "requireLogin": false,
-            "showSidebar": true,
-            "sidebar": 2,
-            "sidebar2enableSharedView": false,
-            "sidebarToggleByChannelNameOnDirectGroup": false,
-            "streambarExpand": false,
-            "streambarMode": 1,
-            "sidebarAddButton": 1,
-            "communityChannelNameFormat": "C/<title>/<name>",
-            "messageIconFlexClass": "block text-justify lg:text-left sm:flex",
-            "messageIconClass": "iconFloat",
-            "--appCommunityIconFontSize": "18px",
-            "--appCommunityIconSize": "42px",
-            "homeTabCommunities": false,
-            "homeTabPreferences": true,
-            "homeTabThemes": true,
-            "onlyPrependCommunities": true,
-            "prependCommunities": [
-              "hive-194864"
-            ],
-            "defaultTheme": "Dark",
-            "--appFontFamily": "'Lato'",
-            "--appFontSize": "16px",
-            "--appMessageFontFamily": "'Lato'",
-            "--appMessageFontSize": "16px"
-          };
-          var element = stwidget.createElement('450px', '556px', false, true);
-          stwidget.setStyle({
-            direction: 'rtl'
-          });
-
-          //optionally add style/positioning
-          //stwidget.setStyle({ direction: 'rtl', top: '51px', right: '32px' });
-          //Add the element to webpage
-          //e.appendChild(element);
-        </script>
-      </div>
 </body>
 
 </html>

@@ -1,0 +1,5 @@
+https://radio.defluence.me/api/nowplaying
+
+https://radio.defluence.me/api/nowplaying/defluenced_radio
+
+https://radio.defluence.me/api/nowplaying_static/defluenced_radio.json
