@@ -13,79 +13,117 @@
   <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
   <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
   <style>
-      /* Style for the album artwork */
-      #albumArt {
-          max-width: 150px;
-          max-height: 150px;
-      }
+    /* Style for the album artwork */
+    #albumArt {
+      max-width: 300px;
+      max-height: 300px;
+    }
 
-      /* Style for the song list */
-      #songList {
-          margin-top: 20px;
-      }
+    /* Style for the song list */
+    #songList {
+      margin-top: 20px;
+    }
 
-      /* Style for individual song entries in the list */
-      .songEntry {
-          margin-bottom: 10px;
-      }
+    /* Style for individual song entries in the list */
+    .songEntry {
+      margin-bottom: 10px;
+    }
+
+    /* Style the navigation menu */
+    ul.nav-menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background-color: #333;
+        overflow: hidden;
+        display: flex; /* Use flexbox */
+        justify-content: center; /* Center items horizontally */
+    }
+
+    li.nav-item {
+        /* No need for 'float' property */
+    }
+
+    li.nav-item a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li.nav-item a:hover {
+        background-color: #ddd;
+        color: black;
+    }
   </style>
 </head>
 
 <body>
+  <div>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="schedule.html">Schedule</a></li>
+      <li class="nav-item"><a href="about.html">About</a></li>
+      <li class="nav-item"><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
   <div class="wrapper">
     <center>
       <div class="welcome-text">
 
         <h2>Defluenced Radio!</h2></br>
         <p>Just push the play button and listen to the best in edutainment and enjoy that you aren't being tracked or spied on.</p>
+        <p>Pro Tip: You can put the following link into a media player such as VLC and save it. Then you can continue to surf the web or listen without a web browser.</p>
+        <p>https://streamunk.indieland.tv/listen/defluenced_radio/radio.mp3</p>
         <br></br>
         <div id="nowPlayingInfo">
-            <img id="albumArt" src="" alt="Album Art">
-            <p id="songTitle"></p>
-            <p id="artist"></p>
+          <img id="albumArt" src="" alt="Album Art">
+          <p id="songTitle"></p>
+          <p id="artist"></p>
         </div><br></br>
         <div>
           <script>
-              async function fetchNowPlaying() {
-                  try {
-                      const response = await fetch('https://radio.defluence.me/api/nowplaying_static/defluenced_radio.json');
-                      const data = await response.json();
+            async function fetchNowPlaying() {
+              try {
+                const response = await fetch('https://radio.defluence.me/api/nowplaying_static/defluenced_radio.json');
+                const data = await response.json();
 
-                      // Extract the relevant information from the API response
-                      const songTitle = data.now_playing.song.title;
-                      const artist = data.now_playing.song.artist;
-                      const artworkUrl = data.now_playing.song.art;
+                // Extract the relevant information from the API response
+                const songTitle = data.now_playing.song.title;
+                const artist = data.now_playing.song.artist;
+                const artworkUrl = data.now_playing.song.art;
 
-                      // Update the audio player source
-                      // const audioPlayer = document.getElementById('audioPlayer');
-                      // audioPlayer.src = "https://streamunk.indieland.tv/listen/defluenced_radio/radio.mp3";
-                      // audioPlayer.load();
+                // Update the audio player source
+                // const audioPlayer = document.getElementById('audioPlayer');
+                // audioPlayer.src = "https://streamunk.indieland.tv/listen/defluenced_radio/radio.mp3";
+                // audioPlayer.load();
 
-                      // Update the song information and artwork
-                      const songTitleElement = document.getElementById('songTitle');
-                      const artistElement = document.getElementById('artist');
-                      const albumArtElement = document.getElementById('albumArt');
+                // Update the song information and artwork
+                const songTitleElement = document.getElementById('songTitle');
+                const artistElement = document.getElementById('artist');
+                const albumArtElement = document.getElementById('albumArt');
 
-                      songTitleElement.textContent = `Song: ${songTitle}`;
-                      artistElement.textContent = `Artist: ${artist}`;
-                      albumArtElement.src = artworkUrl;
-                  } catch (error) {
-                      console.error('Error fetching data:', error);
-                  }
+                songTitleElement.textContent = `Song: ${songTitle}`;
+                artistElement.textContent = `Artist: ${artist}`;
+                albumArtElement.src = artworkUrl;
+              } catch (error) {
+                console.error('Error fetching data:', error);
               }
+            }
 
-              // Call the fetchNowPlaying function to initially populate the data
-              fetchNowPlaying();
+            // Call the fetchNowPlaying function to initially populate the data
+            fetchNowPlaying();
 
-              // Refresh the data every 30 seconds (or as desired)
-              setInterval(fetchNowPlaying, 15000); // 30,000 milliseconds = 30 seconds
+            // Refresh the data every 30 seconds (or as desired)
+            setInterval(fetchNowPlaying, 15000); // 30,000 milliseconds = 30 seconds
           </script>
         </div>
         <div><audio id="audioPlayer" controls>
             <source src="https://streamunk.indieland.tv/listen/defluenced_radio/radio.mp3" type="audio/mp3">
             Your browser does not support the audio element.
-        </audio>
-      </div>
+          </audio>
+        </div>
 
 </body>
 
