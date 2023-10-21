@@ -11,7 +11,7 @@
 }
 
 body{
-    background: url("images/bg.png");
+    background: #434C5E;
     background position: top right;
     postition: relative;
 }
@@ -22,28 +22,28 @@ body{
 
 .welcome-text h1{
     text-align: center;
-    color: #fff;
+    color: #ECEFF4;
     font-size: 80px;
 }
 
 .welcome-text h2{
     text-align: center;
-    color: #fff;
+    color: #ECEFF4;
     font-size: 40px;
 }
 
 .welcome-text a{
-    border: 1px solid #fff;
+    border: 1px solid #ECEFF4;
     padding: 10px 25px;
     text-decoration: none;
     font-size: 14px;
     margin-top: 20px;
     dispaly: inline-block;
-    color: #fff;
+    color: #ECEFF4;
 }
 
 .welcome-text p{
-    color: #fff;
+    color: #ECEFF4;
     font-size: 18px;
 }
 
